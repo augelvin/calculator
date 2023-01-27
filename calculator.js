@@ -82,13 +82,13 @@ divideButton.addEventListener('click', () => {
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((n) => {
   n.addEventListener('click', () => {
-    currentValue += n.id.slice(-1);
+    currentValue += n.id.slice(-1); // add last character of ID to concatinate with currentValue
   });
 });
 
 const del = document.querySelector('#delete');
 del.addEventListener('click', () => {
-  currentValue = displayValue.slice(0, -1);
+  currentValue = currentValue.slice(0, -1);
 })
 
 const clear = document.querySelector('#clear');
@@ -101,10 +101,29 @@ const value = document.querySelector('#value');
 const buttons = document.querySelectorAll('.button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    value.innerHTML= currentValue;
+    value.innerHTML = currentValue;
   });
 });
 
+let operation;
+let a;
+let b;
+
+const operators = document.querySelectorAll('.operator');
+operators.forEach((operator) => {
+  operator.addEventListener('click', () => {
+    operation = operator.id;
+    a = Number(currentValue);
+    currentValue = '';
+    })
+  });
+
+const equal = document.querySelector('#equal');
+equal.addEventListener('click', () => {
+  b = Number(currentValue);
+  currentValue = operate(operation, a, b).toString();
+  value.innerHTML = currentValue
+})
 
 
 
