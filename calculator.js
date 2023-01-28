@@ -47,12 +47,15 @@ operators.forEach((operator) => {
   operator.addEventListener('click', () => {
     operation = operator.id.slice(0, -1);
     operationSymbol = operator.id.slice(-1);
+    
+    //if no calculation has been done, set a to currentValue, else set a as result
     if (!result) {
       a = Number(currentValue);
     } else {
       a = Number(result);
       result = '';
     }
+
     currentValue = '';
     equation = a + ' ' + operationSymbol;
     equationDisplay.innerHTML = equation;
@@ -62,12 +65,14 @@ operators.forEach((operator) => {
 
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
+
+  // if no calculation has been done, set  to currentValue
   if (!result) {
     b = Number(currentValue);
   }
   equation = a + ' ' + operationSymbol + ' ' + b + ' =';
   equationDisplay.innerHTML = equation;
-  result = operate(operation, a, b).toString();
+  result = operate(operation, a, b).toFixed(3);
   value.innerHTML = result;
   currentValue = result;
 })
