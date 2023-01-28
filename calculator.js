@@ -50,12 +50,13 @@ operators.forEach((operator) => {
     if (!result) {
       a = Number(currentValue);
     } else {
-      a = result;
+      a = Number(result);
       result = '';
     }
     currentValue = '';
     equation = a + ' ' + operationSymbol;
     equationDisplay.innerHTML = equation;
+    value.innerHTML = currentValue;
     })
   });
 
