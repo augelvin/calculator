@@ -1,82 +1,7 @@
 let currentValue = '';
+let equation;
 
-/*
-const zero = document.querySelector('#n0');
-zero.addEventListener('click', () => {
-  displayValue += '0';
-})
-
-const one = document.querySelector('#n1');
-one.addEventListener('click', () => {
-  displayValue += '1';
-})
-
-const two = document.querySelector('#n2');
-two.addEventListener('click', () => {
-  displayValue += '2';
-})
-
-const three = document.querySelector('#n3');
-three.addEventListener('click', () => {
-  displayValue += '3';
-})
-
-const four = document.querySelector('#n4');
-four.addEventListener('click', () => {
-  displayValue += '4';
-})
-
-const five = document.querySelector('#n5');
-five.addEventListener('click', () => {
-  displayValue += '5';
-})
-
-const six = document.querySelector('#n6');
-six.addEventListener('click', () => {
-  displayValue += '6';
-})
-
-const seven = document.querySelector('#n7');
-seven.addEventListener('click', () => {
-  displayValue += '7';
-})
-
-const eight = document.querySelector('#n8');
-eight.addEventListener('click', () => {
-  displayValue += '8';
-})
-
-const nine = document.querySelector('#n9');
-nine.addEventListener('click', () => {
-  displayValue += '9';
-})
-
-const point = document.querySelector('#n.');
-point.addEventListener('click', () => {
-  displayValue += '0';
-})
-
-
-const addButton = document.querySelector('#add');
-addButton.addEventListener('click', () => {
-  displayValue += '0';
-})
-
-const subtractButton = document.querySelector('#subtract');
-subtractButton.addEventListener('click', () => {
-  displayValue += '0';
-})
-
-const multiplyButton = document.querySelector('#multiply');
-multiplyButton.addEventListener('click', () => {
-  displayValue += '0';
-})
-
-const divideButton = document.querySelector('#divide');
-divideButton.addEventListener('click', () => {
-  displayValue += '0';
-})
-*/
+const equationDisplay = document.querySelector('#equation');
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((n) => {
@@ -112,6 +37,7 @@ buttons.forEach((button) => {
 });
 
 let operation;
+let operationSymbol;
 let a;
 let b;
 let result;
@@ -119,18 +45,22 @@ let result;
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
   operator.addEventListener('click', () => {
-    operation = operator.id;
+    operation = operator.id.slice(0, -1);
+    operationSymbol = operator.id.slice(-1);
     a = Number(currentValue);
     currentValue = '';
+    equation = a + ' ' + operationSymbol;
+    equationDisplay.innerHTML = equation;
     })
   });
 
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
   b = Number(currentValue);
+  equation = a + ' ' + operationSymbol + ' ' + b + ' =';
+  equationDisplay.innerHTML = equation;
   currentValue = operate(operation, a, b).toString();
   value.innerHTML = currentValue;
-
 })
 
 
