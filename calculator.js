@@ -75,6 +75,13 @@ equal.addEventListener('click', () => {
   equationDisplay.innerHTML = equation;
 
   result = operate(operation, a, b).toFixed(3);
+
+  // while the decimal ends with 0 or . remove last character
+  while (result.endsWith('0') || result.endsWith('.')) {
+    result = result.slice(0, -1);
+  }
+
+
   value.innerHTML = result;
   currentValue = result;
 })
