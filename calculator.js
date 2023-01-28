@@ -48,7 +48,7 @@ operators.forEach((operator) => {
     operation = operator.id.slice(0, -1);
     operationSymbol = operator.id.slice(-1);
     
-    //if no calculation has been done, set a to currentValue, else set a as result
+    // if no calculation has been done, set a to currentValue, else set a as result
     if (!result) {
       a = Number(currentValue);
     } else {
@@ -70,8 +70,10 @@ equal.addEventListener('click', () => {
   if (!result) {
     b = Number(currentValue);
   }
+
   equation = a + ' ' + operationSymbol + ' ' + b + ' =';
   equationDisplay.innerHTML = equation;
+
   result = operate(operation, a, b).toFixed(3);
   value.innerHTML = result;
   currentValue = result;
