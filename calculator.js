@@ -78,13 +78,19 @@ divideButton.addEventListener('click', () => {
 })
 */
 
-
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((n) => {
   n.addEventListener('click', () => {
     currentValue += n.id.slice(-1); // add last character of ID to concatinate with currentValue
-  });
+  }); 
 });
+
+const point = document.querySelector('#point');
+point.addEventListener('click', () => {
+  if (!currentValue.includes('.')) {  
+    currentValue += '.';
+  }
+})
 
 const del = document.querySelector('#delete');
 del.addEventListener('click', () => {
@@ -108,6 +114,7 @@ buttons.forEach((button) => {
 let operation;
 let a;
 let b;
+let result;
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
@@ -122,10 +129,9 @@ const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
   b = Number(currentValue);
   currentValue = operate(operation, a, b).toString();
-  value.innerHTML = currentValue
+  value.innerHTML = currentValue;
+
 })
-
-
 
 
 
@@ -142,7 +148,11 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
-  return a/b
+  if (b !== 0) {
+    return a/b
+  } else {
+    return 'Cannot divide by 0'
+  }
 };
 
 function operate(op, a, b) {
