@@ -7,6 +7,7 @@ const numbers = document.querySelectorAll('.number');
 numbers.forEach((n) => {
   n.addEventListener('click', () => {
     currentValue += n.id.slice(-1); // add last character of ID to concatinate with currentValue
+    result = '';
   }); 
 });
 
@@ -15,16 +16,22 @@ point.addEventListener('click', () => {
   if (!currentValue.includes('.')) {  
     currentValue += '.';
   }
+  result = '';
 })
 
 const del = document.querySelector('#delete');
 del.addEventListener('click', () => {
   currentValue = currentValue.slice(0, -1);
+  result = '';
 })
 
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', () => {
   currentValue = '';
+  a = '';
+  b = '';
+  equationDisplay.innerHTML = ''
+  result = '';
 })
 
 const value = document.querySelector('#value');
@@ -77,7 +84,7 @@ equal.addEventListener('click', () => {
   result = operate(operation, a, b).toFixed(3);
 
   // while the decimal ends with 0 or . remove last character
-  while (result.endsWith('0') || result.endsWith('.')) {
+  while ((result.includes('.') && result.endsWith('0')) || result.endsWith('.')) {
     result = result.slice(0, -1);
   }
 
