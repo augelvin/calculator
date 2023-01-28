@@ -47,7 +47,12 @@ operators.forEach((operator) => {
   operator.addEventListener('click', () => {
     operation = operator.id.slice(0, -1);
     operationSymbol = operator.id.slice(-1);
-    a = Number(currentValue);
+    if (!result) {
+      a = Number(currentValue);
+    } else {
+      a = result;
+      result = '';
+    }
     currentValue = '';
     equation = a + ' ' + operationSymbol;
     equationDisplay.innerHTML = equation;
@@ -56,11 +61,13 @@ operators.forEach((operator) => {
 
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
-  b = Number(currentValue);
+  if (!result) {
+    b = Number(currentValue);
+  }
   equation = a + ' ' + operationSymbol + ' ' + b + ' =';
   equationDisplay.innerHTML = equation;
-  currentValue = operate(operation, a, b).toString();
-  value.innerHTML = currentValue;
+  result = operate(operation, a, b).toString();
+  value.innerHTML = result;
 })
 
 
