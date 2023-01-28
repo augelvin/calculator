@@ -69,6 +69,7 @@ equal.addEventListener('click', () => {
   equationDisplay.innerHTML = equation;
   result = operate(operation, a, b).toString();
   value.innerHTML = result;
+  currentValue = result;
 })
 
 
