@@ -1,5 +1,4 @@
 let currentValue = '';
-let equation;
 
 const equationDisplay = document.querySelector('#equation');
 
@@ -51,21 +50,23 @@ let result;
 
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
-  operator.addEventListener('click', () => {
-    operation = operator.id.slice(0, -1);
-    operationSymbol = operator.id.slice(-1);
+  operator.addEventListener('click', () => {  
     
-    // if no calculation has been done, set a to currentValue, else set a as result
-    if (!result) {
-      a = Number(currentValue);
-    } else {
-      a = Number(result);
-      result = '';
+    if (!operation) {
+      // if no calculation has been done, set a to currentValue, else set a as result
+      if (!result) {
+        a = Number(currentValue);
+      } else {
+        a = Number(result);
+        result = '';
+      }
     }
 
+    operation = operator.id.slice(0, -1);
+    operationSymbol = operator.id.slice(-1);
+
     currentValue = '';
-    equation = a + ' ' + operationSymbol;
-    equationDisplay.innerHTML = equation;
+    equationDisplay.innerHTML = a + ' ' + operationSymbol;
     value.innerHTML = currentValue;
     })
   });
@@ -78,8 +79,7 @@ equal.addEventListener('click', () => {
     b = Number(currentValue);
   }
 
-  equation = a + ' ' + operationSymbol + ' ' + b + ' =';
-  equationDisplay.innerHTML = equation;
+  equationDisplay.innerHTML = a + ' ' + operationSymbol + ' ' + b + ' =';
 
   result = operate(operation, a, b).toFixed(3);
 
@@ -91,6 +91,8 @@ equal.addEventListener('click', () => {
 
   value.innerHTML = result;
   currentValue = result;
+  operation = '';
+  operationSymbol = '';
 })
 
 
